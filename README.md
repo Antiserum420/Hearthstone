@@ -1,2 +1,2 @@
-# Hearthstone
+# SnakeMP
 SFML game
