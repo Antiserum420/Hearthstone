@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v2.1": {
-      "Hearthstone420/1.0.0": {
+      "Main/1.0.0": {
         "dependencies": {
           "sfmlnet-audio-2": "2.2.0.0",
           "sfmlnet-graphics-2": "2.2.0.0",
@@ -14,7 +14,7 @@
           "sfmlnet-window-2": "2.2.0.0"
         },
         "runtime": {
-          "Hearthstone420.dll": {}
+          "Main.dll": {}
         }
       },
       "sfmlnet-audio-2/2.2.0.0": {
@@ -52,7 +52,7 @@
     }
   },
   "libraries": {
-    "Hearthstone420/1.0.0": {
+    "Main/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -687,11 +687,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\patri\\source\\repos\\Hearthstone\\Hearthstone420\\Hearthstone420.csproj",
-      "projectName": "Hearthstone420",
-      "projectPath": "C:\\Users\\patri\\source\\repos\\Hearthstone\\Hearthstone420\\Hearthstone420.csproj",
+      "projectUniqueName": "C:\\Users\\patri\\source\\repos\\Hearthstone\\Main\\Main.csproj",
+      "projectName": "Main",
+      "projectPath": "C:\\Users\\patri\\source\\repos\\Hearthstone\\Main\\Main.csproj",
       "packagesPath": "C:\\Users\\patri\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\patri\\source\\repos\\Hearthstone\\Hearthstone420\\obj\\",
+      "outputPath": "C:\\Users\\patri\\source\\repos\\Hearthstone\\Main\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -722,6 +722,7 @@
       "netcoreapp2.1": {
         "dependencies": {
           "Microsoft.NETCore.App": {
+            "suppressParent": "All",
             "target": "Package",
             "version": "[2.1.0, )",
             "autoReferenced": true
