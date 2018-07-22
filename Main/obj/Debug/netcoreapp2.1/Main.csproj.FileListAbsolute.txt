@@ -22,6 +22,10 @@ C:\Users\patri\source\repos\Hearthstone\Hearthstone420\obj\Debug\netcoreapp2.1\M
 C:\Users\patri\source\repos\Hearthstone\Hearthstone420\obj\Debug\netcoreapp2.1\Main.csproj.CopyComplete
 C:\Users\patri\source\repos\Hearthstone\Hearthstone420\obj\Debug\netcoreapp2.1\Main.dll
 C:\Users\patri\source\repos\Hearthstone\Hearthstone420\obj\Debug\netcoreapp2.1\Main.pdb
+C:\Users\patri\source\repos\Hearthstone\Main\bin\Debug\netcoreapp2.1\csfml-graphics-2.dll
+C:\Users\patri\source\repos\Hearthstone\Main\bin\Debug\netcoreapp2.1\csfml-window-2.dll
+C:\Users\patri\source\repos\Hearthstone\Main\bin\Debug\netcoreapp2.1\openal32.dll
+C:\Users\patri\source\repos\Hearthstone\Main\bin\Debug\netcoreapp2.1\OpenTK.dll
 C:\Users\patri\source\repos\Hearthstone\Main\bin\Debug\netcoreapp2.1\Main.deps.json
 C:\Users\patri\source\repos\Hearthstone\Main\bin\Debug\netcoreapp2.1\Main.runtimeconfig.json
 C:\Users\patri\source\repos\Hearthstone\Main\bin\Debug\netcoreapp2.1\Main.runtimeconfig.dev.json
@@ -38,3 +42,7 @@ C:\Users\patri\source\repos\Hearthstone\Main\obj\Debug\netcoreapp2.1\Main.Assemb
 C:\Users\patri\source\repos\Hearthstone\Main\obj\Debug\netcoreapp2.1\Main.csproj.CopyComplete
 C:\Users\patri\source\repos\Hearthstone\Main\obj\Debug\netcoreapp2.1\Main.dll
 C:\Users\patri\source\repos\Hearthstone\Main\obj\Debug\netcoreapp2.1\Main.pdb
+C:\Users\patri\source\repos\Hearthstone\Main\bin\Debug\netcoreapp2.1\csfml-audio-2.dll
+C:\Users\patri\source\repos\Hearthstone\Main\bin\Debug\netcoreapp2.1\csfml-system-2.dll
+C:\Users\patri\source\repos\Hearthstone\Main\bin\Debug\netcoreapp2.1\libsndfile-1.dll
+C:\Users\patri\source\repos\Hearthstone\Main\bin\Debug\netcoreapp2.1\OpenTK.Compatibility.dll
