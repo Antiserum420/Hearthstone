@@ -12,6 +12,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\shared\shared.csproj" />
+    <ProjectReference Include="..\utils\utils.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="sfmlnet-audio-2">
       <HintPath>..\SFML.Net\lib-x64\sfmlnet-audio-2.dll</HintPath>
     </Reference>
