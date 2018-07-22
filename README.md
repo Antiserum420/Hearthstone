@@ -1,2 +1,2 @@
-# DIEcreaturesDIE
+# Hearthstone
 SFML game
