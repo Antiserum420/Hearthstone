@@ -1,6 +1,6 @@
 ﻿using SFML.System;
 
-namespace shared.Extensions
+namespace Shared.Extensions
 {
     public static class Vector2fExtensions
     {

@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "game", "game\game.csproj", "{5AAD049F-72B8-4392-AAA1-1CBA2F9CEF07}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Game", "game\Game.csproj", "{5AAD049F-72B8-4392-AAA1-1CBA2F9CEF07}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "shared", "shared\shared.csproj", "{B7D22D25-8A8F-4C81-B196-CD0DD65ADA9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "shared\Shared.csproj", "{B7D22D25-8A8F-4C81-B196-CD0DD65ADA9B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "utils", "utils\utils.csproj", "{E8F324DB-408B-4376-A5F8-6C7B56E1601A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utils", "utils\Utils.csproj", "{E8F324DB-408B-4376-A5F8-6C7B56E1601A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

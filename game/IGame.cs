@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace game
+namespace Game
 {
     interface IGame : IDisposable
     {

@@ -2,11 +2,11 @@
 using SFML.System;
 using SFML.Window;
 using System.Collections.Generic;
-using shared.Extensions;
-using System.Threading;
+using Shared.Extensions;
 using System;
+using Shared.Resources;
 
-namespace game
+namespace Game
 {
     public class Game : IGame
     {
@@ -37,7 +37,7 @@ namespace game
             Window.SetView(view);
             Window.SetFramerateLimit(144);
             Window.SetVerticalSyncEnabled(false);
-
+          
             Window.Closed += (sender, e) => 
             {
                 var window = sender as RenderWindow;
@@ -45,6 +45,8 @@ namespace game
 
                 Running = false;
             };
+
+            JoystickManager.Instance.Initialize(this);
         }
 
         public void Dispose()
@@ -58,6 +60,13 @@ namespace game
             if(disposing)
             {
                 Window.Dispose();
+
+                foreach(var gameState in _gameStates)
+                {
+                    gameState.Cleanup();
+                }
+
+                ResourceManager.Instance.Cleanup();
             }
         }
 
@@ -89,7 +98,7 @@ namespace game
             {
                 _gameStates[_gameStates.Count - 1].Draw(this);
             }
-
+ 
             Window.Display();
         }
 
