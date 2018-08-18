@@ -5,24 +5,19 @@ namespace Game
 {
     public abstract class GameState
     {
-        public virtual void Cleanup()
-        {
+        protected IGame Game { get; private set; }
 
+        public abstract void Cleanup();
+
+        public virtual void Initialize(IGame game)
+        {
+            Game = game;
         }
 
-        public virtual void HandleEvents(Game game)
-        {
- 
-        }
+        public abstract void HandleEvents();
 
-        public virtual void Update(Game game, Time dt)
-        {
-            
-        }
+        public abstract void Update(Time dt);
 
-        public virtual void Draw(Game game)
-        {
-
-        }
+        public abstract void Draw();
     }
 }

@@ -5,12 +5,10 @@ using System;
 
 namespace Game
 {
-    public class Player : IComponent
+    public class Player : GameObject
     {
         private Texture _playerTexture;
         private Sprite _playerSprite;
-
-        private Transform _playerTransform;
 
         private const float CONTROLLER_DEADZONE = 0.3f;
 
@@ -20,24 +18,19 @@ namespace Game
             _playerSprite = new Sprite(_playerTexture);
         }
 
-        public void Cleanup()
+        public override void Update(Time dt)
         {
 
         }
 
-        public void HandleEvents()
-        {
-        
-        }
-
-        public void Update(Game game, Time dt)
+        public override void Draw(RenderTarget target, RenderStates states)
         {
 
         }
 
-        public void Draw(RenderTarget target, RenderStates states)
+        public override FloatRect GetGlobalBounds()
         {
-            target.Draw(_playerSprite, states);
+            return new FloatRect();
         }
     }
 }

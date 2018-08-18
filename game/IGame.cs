@@ -1,9 +1,16 @@
-﻿using System;
+﻿using SFML.Graphics;
+using System;
 
 namespace Game
 {
-    interface IGame : IDisposable
+    public interface IGame : IDisposable
     {
+        RenderWindow Window { get; }
+
+        bool Running { get; }
+
+        bool Paused { get; }
+
         void Initialize();
 
         void HandleEvents();
@@ -11,5 +18,11 @@ namespace Game
         void Update();
 
         void Draw();
+
+        void PushState(GameState gameState);
+
+        void PopState();
+
+        void ChangeState(GameState gameState);
     }
 }

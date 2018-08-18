@@ -4,4 +4,10 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="sfmlnet-system-2">
+      <HintPath>..\SFML.Net\lib-x64\sfmlnet-system-2.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

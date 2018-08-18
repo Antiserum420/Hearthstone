@@ -1,34 +1,23 @@
 ﻿using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
-using System.Collections.Generic;
 using Shared.Extensions;
 using System;
 using Shared.Resources;
 
 namespace Game
 {
-    public class Game : IGame
+    public class Game : GameBase
     {
         private const int WINDOW_WIDTH = 1920;
         private const int WINDOW_HEIGHT = 1080;
 
-        private IList<GameState> _gameStates;
-        private Clock _clock;
+        public Game() : base(new RenderWindow(new VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Game", Styles.Default))
+        {          
 
-        public RenderWindow Window { get; set; }
-        public bool Running { get; set; }
-        public bool Paused { get; set; }
-        
-        public Game()
-        {
-            _gameStates = new List<GameState>();
-            _clock = new Clock();
-
-            Window = new RenderWindow(new VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Game", Styles.Default);
         }
 
-        public void Initialize()
+        public override void Initialize()
         {
             Running = true;
             Paused = false;
@@ -49,76 +38,45 @@ namespace Game
             JoystickManager.Instance.Initialize(this);
         }
 
-        public void Dispose()
+        public override void Dispose()
         {
-            Dispose(true);
+            base.Dispose();
+
+            ResourceManager.Instance.Cleanup();
+
             GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose(bool disposing)
-        {
-            if(disposing)
-            {
-                Window.Dispose();
-
-                foreach(var gameState in _gameStates)
-                {
-                    gameState.Cleanup();
-                }
-
-                ResourceManager.Instance.Cleanup();
-            }
-        }
-
-        public void HandleEvents()
+        public override void HandleEvents()
         {
             Window.DispatchEvents();
 
             if (_gameStates.Count > 0)
             {
                 var time = _clock.Restart();
-                _gameStates[_gameStates.Count - 1].HandleEvents(this);
+                _gameStates[_gameStates.Count - 1].HandleEvents();
             }
         }
 
-        public void Update()
+        public override void Update()
         {
             if(_gameStates.Count > 0)
             {
                 var time = _clock.Restart();
-                _gameStates[_gameStates.Count - 1].Update(this, time);
+                _gameStates[_gameStates.Count - 1].Update(time);
             }
         }
 
-        public void Draw()
+        public override void Draw()
         {
             Window.Clear();
 
             if(_gameStates.Count > 0)
             {
-                _gameStates[_gameStates.Count - 1].Draw(this);
+                _gameStates[_gameStates.Count - 1].Draw();
             }
  
             Window.Display();
-        }
-
-        public void PushState(GameState gameState)
-        {
-            _gameStates.Add(gameState);
-        }
-
-        public void PopState()
-        {
-            if(_gameStates.Count > 0)
-            {
-                _gameStates.RemoveAt(_gameStates.Count - 1);
-            }
-        }
-
-        public void ChangeState(GameState gameState)
-        {
-            PopState();
-            PushState(gameState);
         }
     } 
 }

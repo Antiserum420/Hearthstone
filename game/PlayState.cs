@@ -7,11 +7,13 @@ namespace Game
     {
         private static readonly Lazy<PlayState> lazy = new Lazy<PlayState>(() => new PlayState());
 
+        public static PlayState Instance => lazy.Value;
+
         private Player _player;
 
         static PlayState()
         {
-            
+
         }
 
         private PlayState()
@@ -19,34 +21,29 @@ namespace Game
             _player = new Player();
         }
 
-        public static PlayState Instance => lazy.Value;
+        public override void Initialize(IGame game)
+        {
+            base.Initialize(game);
+        }
 
         public override void Cleanup()
         {
-            base.Cleanup();
 
-            _player.Cleanup();
         }
 
-        public override void HandleEvents(Game game)
+        public override void HandleEvents()
         {
-            base.HandleEvents(game);
 
-            _player.HandleEvents();
         }
 
-        public override void Update(Game game, Time dt)
+        public override void Update(Time dt)
         {
-            base.Update(game, dt);
 
-            _player.Update(game, dt);
         }
 
-        public override void Draw(Game game)
-        {
-            base.Draw(game);
-
-            game.Window.Draw(_player);
+        public override void Draw()
+        { 
+            Game.Window.Draw(_player);
         }
     }
 }
