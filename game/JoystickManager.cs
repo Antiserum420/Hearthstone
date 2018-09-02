@@ -1,6 +1,9 @@
-﻿using SFML.System;
-using SFML.Window;
+﻿using SFML.Window;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using Shared.Enums;
+using SFML.System;
 
 namespace Game
 {
@@ -8,19 +11,11 @@ namespace Game
     {
         private static readonly Lazy<JoystickManager> lazy = new Lazy<JoystickManager>(() => new JoystickManager());
 
-        private Vector2f _leftStick;
-        private Vector2f _rightStick;
+        public IList<Joystick> Joysticks;
 
-        private bool _rightTrigger;
-        private bool _leftTrigger;
+        private IGame _game;
 
-        public bool RightTrigger { get { return _rightTrigger; } private set { } }
-        public bool LeftTrigger { get { return _leftTrigger; } private set { } }        
-
-        public Vector2f LeftStick { get { return _leftStick; } private set { } }
-        public Vector2f RightStick { get { return _rightStick; } private set { } }
-
-        private const float CONTROLLER_DEADZONE = 0.3f;
+        private float CONTROLLER_DEADZONE = 0.3f;
 
         static JoystickManager()
         {
@@ -29,72 +24,190 @@ namespace Game
 
         private JoystickManager()
         {
-            LeftStick = new Vector2f(0F, 0F);
-            RightStick = new Vector2f(0F, 0F);
+            Joysticks = new List<Joystick>();
         }
 
         public static JoystickManager Instance => lazy.Value;
 
-        public void Initialize(Game game)
+        public void Initialize(IGame game)
         {
-            game.Window.JoystickConnected += OnJoystickConnected;
-            game.Window.JoystickDisconnected += OnJoystickDisconnected;
-            game.Window.JoystickButtonPressed += OnJoystickButtonPressed;
-            game.Window.JoystickButtonReleased += OnJoystickButtonReleased;
+            _game = game;
+            _game.Window.JoystickConnected += OnJoystickConnected;
+            _game.Window.JoystickDisconnected += OnJoystickDisconnected;
+            _game.Window.JoystickButtonPressed += OnJoystickButtonPressed;
+            _game.Window.JoystickButtonReleased += OnJoystickButtonReleased;
+            _game.Window.JoystickMoved += OnJoystickMoved;
+
+            OnJoystickConnected(this, new JoystickConnectEventArgs(new JoystickConnectEvent { JoystickId = 0 }));
         }
 
-        private void OnJoystickConnected(object sender, EventArgs e)
+        public void Update()
         {
-            Console.WriteLine("Joystick connected");
-
+            SFML.Window.Joystick.Update();
         }
 
-        private void OnJoystickDisconnected(object sender, EventArgs e)
+        private void OnJoystickConnected(object sender, JoystickConnectEventArgs e)
         {
-            Console.WriteLine("Joystick disconnected");
+            var joystickId = e.JoystickId;
 
-        }
-
-        private void OnJoystickButtonPressed(object sender, EventArgs e)
-        {
-            Console.WriteLine("yoe");
-
-        }
-
-        private void OnJoystickButtonReleased(object sender, EventArgs e)
-        {
-            Console.WriteLine("yoe");
-
-        }
-
-        private void OnJoystickMoved(object sender, EventArgs e)
-        {
-            _leftStick.X = Joystick.GetAxisPosition(0, Joystick.Axis.X);
-            _leftStick.Y = Joystick.GetAxisPosition(0, Joystick.Axis.Y);
-
-            if (Math.Abs(LeftStick.X) < CONTROLLER_DEADZONE)
+            if (!Joysticks.Any(j => j.JoystickId == joystickId))
             {
-                _leftStick.X = 0F;
+                var joystick = new Joystick
+                {
+                    JoystickId = joystickId
+                };
+
+                PushJoystick(joystick);
             }
-            if (Math.Abs(LeftStick.Y) < CONTROLLER_DEADZONE)
-            {
-                _leftStick.Y = 0F;
-            }
+        }
+
+        private void OnJoystickDisconnected(object sender, JoystickConnectEventArgs e)
+        {
+            var joystickId = e.JoystickId;
             
-            _rightStick.X = Joystick.GetAxisPosition(0, Joystick.Axis.U);
-            _rightStick.Y = Joystick.GetAxisPosition(0, Joystick.Axis.R);
-
-            if (Math.Abs(_rightStick.X) < CONTROLLER_DEADZONE)
+            var joystick = Joysticks.FirstOrDefault(j => j.JoystickId == joystickId);
+            if(joystick != null)
             {
-                _rightStick.X = 0F;
-            }
-            if (Math.Abs(_rightStick.Y) < CONTROLLER_DEADZONE)
-            {
-                _rightStick.Y = 0F;
-            }
+                PopJoystick(joystick);
+            }            
+        }
 
-            _rightTrigger = Joystick.GetAxisPosition(0, Joystick.Axis.Z) < -0.5F;
-            _leftTrigger = Joystick.GetAxisPosition(0, Joystick.Axis.V) < -0.5F;
+        private void OnJoystickButtonPressed(object sender, JoystickButtonEventArgs e)
+        {            
+            var joystickId = e.JoystickId;
+            var button = (JoystickButtonType)e.Button;
+
+            var joystick = Joysticks.FirstOrDefault(j => j.JoystickId == joystickId);
+            if(joystick != null)
+            {
+                switch(button)
+                {
+                    case JoystickButtonType.AButton:
+                        {
+                            joystick.AButton = true;
+                            break;
+                        }
+                    case JoystickButtonType.BButton:
+                        {
+                            joystick.BButton = true;
+                            break;
+                        }
+                    case JoystickButtonType.XButton:
+                        {
+                            joystick.XButton = true;
+                            break;
+                        }
+                    case JoystickButtonType.YButton:
+                        {
+                            joystick.YButton = true;
+                            break;
+                        }
+                    case JoystickButtonType.StartButton:
+                        {
+                            joystick.StartButton = true;
+                            break;
+                        }
+                    case JoystickButtonType.BackButton:
+                        {
+                            joystick.BackButton = true;
+                            break;
+                        }
+                }
+            }
+        }
+
+        private void OnJoystickButtonReleased(object sender, JoystickButtonEventArgs e)
+        {
+            var joystickId = e.JoystickId;
+            var button = (JoystickButtonType)e.Button;
+
+            var joystick = Joysticks.FirstOrDefault(j => j.JoystickId == joystickId);
+            if (joystick != null)
+            {
+                switch (button)
+                {
+                    case JoystickButtonType.AButton:
+                        {
+                            joystick.AButton = false;
+                            break;
+                        }
+                    case JoystickButtonType.BButton:
+                        {
+                            joystick.BButton = false;
+                            break;
+                        }
+                    case JoystickButtonType.XButton:
+                        {
+                            joystick.XButton = false;
+                            break;
+                        }
+                    case JoystickButtonType.YButton:
+                        {
+                            joystick.YButton = false;
+                            break;
+                        }
+                    case JoystickButtonType.StartButton:
+                        {
+                            joystick.StartButton = false;
+                            break;
+                        }
+                    case JoystickButtonType.BackButton:
+                        {
+                            joystick.BackButton = false;
+                            break;
+                        }
+                }
+            }
+        }
+
+        private void OnJoystickMoved(object sender, JoystickMoveEventArgs e)
+        {
+            var joystickId = e.JoystickId;
+
+            var joystick = Joysticks.FirstOrDefault(j => j.JoystickId == joystickId);
+            if (joystick != null)
+            {
+                joystick.LeftStick = new Vector2f
+                {
+                    X = SFML.Window.Joystick.GetAxisPosition(joystickId, SFML.Window.Joystick.Axis.X),
+                    Y = SFML.Window.Joystick.GetAxisPosition(joystickId, SFML.Window.Joystick.Axis.Y)
+                };
+
+                joystick.LeftStick = new Vector2f
+                {
+                    X = Math.Abs(joystick.LeftStick.X) < CONTROLLER_DEADZONE ? 0f : joystick.LeftStick.X,
+                    Y = Math.Abs(joystick.LeftStick.Y) < CONTROLLER_DEADZONE ? 0f : joystick.LeftStick.Y
+                };
+
+                joystick.RightStick = new Vector2f
+                {
+                    X = SFML.Window.Joystick.GetAxisPosition(joystickId, SFML.Window.Joystick.Axis.U),
+                    Y = SFML.Window.Joystick.GetAxisPosition(joystickId, SFML.Window.Joystick.Axis.R)
+                };
+
+                joystick.RightStick = new Vector2f
+                {
+                    X = Math.Abs(joystick.RightStick.X) < CONTROLLER_DEADZONE ? 0f : joystick.RightStick.X,
+                    Y = Math.Abs(joystick.RightStick.Y) < CONTROLLER_DEADZONE ? 0f : joystick.RightStick.Y
+                };
+
+                joystick.RightTrigger = SFML.Window.Joystick.GetAxisPosition(joystickId, SFML.Window.Joystick.Axis.Z) < -0.5F;
+                joystick.LeftTrigger = SFML.Window.Joystick.GetAxisPosition(joystickId, SFML.Window.Joystick.Axis.V) < -0.5F;
+            }
+        }
+
+        private void PushJoystick(Joystick joystick)
+        {
+            joystick.Initialize(_game);
+            Joysticks.Add(joystick);
+        }
+
+        private void PopJoystick(Joystick joystick)
+        {
+            if (Joysticks.Count > 0)
+            {
+                Joysticks.RemoveAt(Joysticks.Count - 1);
+            }
         }
     }
 }

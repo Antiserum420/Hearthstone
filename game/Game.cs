@@ -65,6 +65,8 @@ namespace Game
                 var time = _clock.Restart();
                 _gameStates[_gameStates.Count - 1].Update(time);
             }
+
+            JoystickManager.Instance.Update();
         }
 
         public override void Draw()
