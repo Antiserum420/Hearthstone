@@ -80,39 +80,7 @@ namespace Game
             var joystick = Joysticks.FirstOrDefault(j => j.JoystickId == joystickId);
             if(joystick != null)
             {
-                switch(button)
-                {
-                    case JoystickButtonType.AButton:
-                        {
-                            joystick.AButton = true;
-                            break;
-                        }
-                    case JoystickButtonType.BButton:
-                        {
-                            joystick.BButton = true;
-                            break;
-                        }
-                    case JoystickButtonType.XButton:
-                        {
-                            joystick.XButton = true;
-                            break;
-                        }
-                    case JoystickButtonType.YButton:
-                        {
-                            joystick.YButton = true;
-                            break;
-                        }
-                    case JoystickButtonType.StartButton:
-                        {
-                            joystick.StartButton = true;
-                            break;
-                        }
-                    case JoystickButtonType.BackButton:
-                        {
-                            joystick.BackButton = true;
-                            break;
-                        }
-                }
+                joystick.ButtonsPressed[button] = true;
             }
         }
 
@@ -124,39 +92,7 @@ namespace Game
             var joystick = Joysticks.FirstOrDefault(j => j.JoystickId == joystickId);
             if (joystick != null)
             {
-                switch (button)
-                {
-                    case JoystickButtonType.AButton:
-                        {
-                            joystick.AButton = false;
-                            break;
-                        }
-                    case JoystickButtonType.BButton:
-                        {
-                            joystick.BButton = false;
-                            break;
-                        }
-                    case JoystickButtonType.XButton:
-                        {
-                            joystick.XButton = false;
-                            break;
-                        }
-                    case JoystickButtonType.YButton:
-                        {
-                            joystick.YButton = false;
-                            break;
-                        }
-                    case JoystickButtonType.StartButton:
-                        {
-                            joystick.StartButton = false;
-                            break;
-                        }
-                    case JoystickButtonType.BackButton:
-                        {
-                            joystick.BackButton = false;
-                            break;
-                        }
-                }
+                joystick.ButtonsPressed[button] = false;
             }
         }
 
@@ -191,8 +127,13 @@ namespace Game
                     Y = Math.Abs(joystick.RightStick.Y) < CONTROLLER_DEADZONE ? 0f : joystick.RightStick.Y
                 };
 
-                joystick.RightTrigger = SFML.Window.Joystick.GetAxisPosition(joystickId, SFML.Window.Joystick.Axis.Z) < -0.5F;
-                joystick.LeftTrigger = SFML.Window.Joystick.GetAxisPosition(joystickId, SFML.Window.Joystick.Axis.V) < -0.5F;
+                joystick.RightTriggerPressed = SFML.Window.Joystick.GetAxisPosition(joystickId, SFML.Window.Joystick.Axis.Z) < -0.5F;
+                joystick.LeftTriggerPressed = SFML.Window.Joystick.GetAxisPosition(joystickId, SFML.Window.Joystick.Axis.V) < -0.5F;
+
+                joystick.NumPadsPressed[JoystickNumPadType.Left] = SFML.Window.Joystick.GetAxisPosition(joystickId, SFML.Window.Joystick.Axis.PovX) == -100;
+                joystick.NumPadsPressed[JoystickNumPadType.Right] = SFML.Window.Joystick.GetAxisPosition(joystickId, SFML.Window.Joystick.Axis.PovX) == 100;
+                joystick.NumPadsPressed[JoystickNumPadType.Up] = SFML.Window.Joystick.GetAxisPosition(joystickId, SFML.Window.Joystick.Axis.PovY) == 100;
+                joystick.NumPadsPressed[JoystickNumPadType.Down] = SFML.Window.Joystick.GetAxisPosition(joystickId, SFML.Window.Joystick.Axis.PovY) == -100;
             }
         }
 

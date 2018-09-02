@@ -10,4 +10,13 @@
         BackButton = 6,
         StartButton = 7,        
     }
+
+    public enum JoystickNumPadType
+    {
+        None,
+        Left,
+        Right,
+        Up,
+        Down
+    }
 }
