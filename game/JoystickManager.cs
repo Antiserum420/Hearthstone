@@ -11,7 +11,7 @@ namespace Game
     {
         private static readonly Lazy<JoystickManager> lazy = new Lazy<JoystickManager>(() => new JoystickManager());
 
-        public IList<Joystick> Joysticks;
+        public IList<Joystick> Joysticks { get; set; }
 
         private IGame _game;
 
@@ -48,9 +48,11 @@ namespace Game
 
         private void OnJoystickConnected(object sender, JoystickConnectEventArgs e)
         {
+            Update();
+
             var joystickId = e.JoystickId;
 
-            if (!Joysticks.Any(j => j.JoystickId == joystickId))
+            if (!Joysticks.Any(j => j.JoystickId == joystickId) && SFML.Window.Joystick.IsConnected(joystickId))
             {
                 var joystick = new Joystick
                 {
