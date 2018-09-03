@@ -48,7 +48,7 @@ namespace Shared.Resources
 
                     texture = new Texture(Path.Combine(solutionDirectory, TEXTURE_PATH, $"{key}.png"));
                 }
-                catch(Exception ex)
+                catch
                 {
                     return null;
                 }
