@@ -11,6 +11,57 @@
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="bin\Debug\netcoreapp2.1\Game.deps.json" />
+    <Content Include="bin\Debug\netcoreapp2.1\Game.runtimeconfig.dev.json" />
+    <Content Include="bin\Debug\netcoreapp2.1\Game.runtimeconfig.json" />
+    <Content Include="bin\Release\netcoreapp2.1\Game.deps.json" />
+    <Content Include="bin\Release\netcoreapp2.1\Game.runtimeconfig.dev.json" />
+    <Content Include="bin\Release\netcoreapp2.1\Game.runtimeconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bin\Debug\netcoreapp2.1\csfml-audio-2.dll" />
+    <None Include="bin\Debug\netcoreapp2.1\csfml-graphics-2.dll" />
+    <None Include="bin\Debug\netcoreapp2.1\csfml-system-2.dll" />
+    <None Include="bin\Debug\netcoreapp2.1\csfml-window-2.dll" />
+    <None Include="bin\Debug\netcoreapp2.1\Game.dll" />
+    <None Include="bin\Debug\netcoreapp2.1\Game.pdb" />
+    <None Include="bin\Debug\netcoreapp2.1\libsndfile-1.dll" />
+    <None Include="bin\Debug\netcoreapp2.1\openal32.dll" />
+    <None Include="bin\Debug\netcoreapp2.1\OpenTK.Compatibility.dll" />
+    <None Include="bin\Debug\netcoreapp2.1\OpenTK.dll" />
+    <None Include="bin\Debug\netcoreapp2.1\sfmlnet-audio-2.dll" />
+    <None Include="bin\Debug\netcoreapp2.1\sfmlnet-graphics-2.dll" />
+    <None Include="bin\Debug\netcoreapp2.1\sfmlnet-system-2.dll" />
+    <None Include="bin\Debug\netcoreapp2.1\sfmlnet-window-2.dll" />
+    <None Include="bin\Debug\netcoreapp2.1\Shared.dll" />
+    <None Include="bin\Debug\netcoreapp2.1\Shared.pdb" />
+    <None Include="bin\Debug\netcoreapp2.1\Utils.dll" />
+    <None Include="bin\Debug\netcoreapp2.1\Utils.pdb" />
+    <None Include="bin\Release\netcoreapp2.1\csfml-audio-2.dll" />
+    <None Include="bin\Release\netcoreapp2.1\csfml-graphics-2.dll" />
+    <None Include="bin\Release\netcoreapp2.1\csfml-system-2.dll" />
+    <None Include="bin\Release\netcoreapp2.1\csfml-window-2.dll" />
+    <None Include="bin\Release\netcoreapp2.1\Game.dll" />
+    <None Include="bin\Release\netcoreapp2.1\Game.pdb" />
+    <None Include="bin\Release\netcoreapp2.1\openal32.dll" />
+    <None Include="bin\Release\netcoreapp2.1\OpenTK.Compatibility.dll" />
+    <None Include="bin\Release\netcoreapp2.1\OpenTK.dll" />
+    <None Include="bin\Release\netcoreapp2.1\sfmlnet-audio-2.dll" />
+    <None Include="bin\Release\netcoreapp2.1\sfmlnet-graphics-2.dll" />
+    <None Include="bin\Release\netcoreapp2.1\sfmlnet-system-2.dll" />
+    <None Include="bin\Release\netcoreapp2.1\sfmlnet-window-2.dll" />
+    <None Include="bin\Release\netcoreapp2.1\Shared.dll" />
+    <None Include="bin\Release\netcoreapp2.1\Shared.pdb" />
+    <None Include="bin\Release\netcoreapp2.1\Utils.dll" />
+    <None Include="bin\Release\netcoreapp2.1\Utils.pdb" />
+  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Unity" Version="5.8.11" />
   </ItemGroup>
@@ -60,6 +111,10 @@
     <None Update="OpenTK.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="bin\Debug\netcoreapp2.1\bin\Debug\" />
   </ItemGroup>
 
 </Project>
